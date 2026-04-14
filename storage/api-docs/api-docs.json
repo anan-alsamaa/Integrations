@@ -1,0 +1,402 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Order Webhook API",
+        "description": "API for receiving order webhooks and storing order data",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/Integrations/public/api/order": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Receive order webhook",
+                "description": "Stores order data and forwards it to an external API",
+                "operationId": "7414cf5a344836064c6b87e0b8338b96",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "additionalDeliverys": {
+                                        "description": "Additional delivery information (optional)",
+                                        "type": "object",
+                                        "nullable": true
+                                    },
+                                    "bigOrderTag": {
+                                        "description": "Whether the order is tagged as a big order",
+                                        "type": "boolean"
+                                    },
+                                    "feeDtl": {
+                                        "properties": {
+                                            "customerFee": {
+                                                "properties": {
+                                                    "actTotal": {
+                                                        "description": "The actual total amount for the customer",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "actTotalStr": {
+                                                        "description": "The actual total amount in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "diffPrice": {
+                                                        "description": "The difference in price compared to the original",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "diffPriceStr": {
+                                                        "description": "The difference price in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "discounts": {
+                                                        "description": "Discount applied to the order",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "discountsStr": {
+                                                        "description": "Discount amount in string format",
+                                                        "type": "string",
+                                                        "example": "-ر.س.‏ 0.00"
+                                                    },
+                                                    "i18n": {
+                                                        "properties": {
+                                                            "country": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "currency": {
+                                                                "type": "string",
+                                                                "example": "SAR"
+                                                            },
+                                                            "locale": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "region": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "originPrice": {
+                                                        "description": "The original price of the order",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "originPriceStr": {
+                                                        "description": "The original price in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "payTotal": {
+                                                        "description": "The total price the customer will pay",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "payTotalStr": {
+                                                        "description": "The total price the customer will pay in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "platformFee": {
+                                                        "description": "The platform fee for the order",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "platformFeeStr": {
+                                                        "description": "The platform fee in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "productPrice": {
+                                                        "description": "The price of the products in the order",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "productPriceStr": {
+                                                        "description": "The product price in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "productPriceSubTotal": {
+                                                        "description": "The subtotal of product prices",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "productPriceSubTotalStr": {
+                                                        "description": "The subtotal of product prices in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "shippingFee": {
+                                                        "description": "The shipping fee for the order",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "shippingFeeStr": {
+                                                        "description": "The shipping fee in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "showDiscounts": {
+                                                        "description": "The amount of discount applied for display purposes",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "showDiscountsStr": {
+                                                        "description": "The display discount amount in string format",
+                                                        "type": "string",
+                                                        "example": "-ر.س.‏ 0.00"
+                                                    },
+                                                    "tip": {
+                                                        "description": "The tip for the order",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "tipStr": {
+                                                        "description": "The tip in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "merchantFee": {
+                                                "properties": {
+                                                    "activityFee": {
+                                                        "description": "The activity fee for the merchant",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "activityFeeStr": {
+                                                        "description": "The activity fee in string format",
+                                                        "type": "string",
+                                                        "example": "-ر.س.‏ 0.00"
+                                                    },
+                                                    "bankTransactionFee": {
+                                                        "description": "The bank transaction fee for the merchant",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "bankTransactionFeeStr": {
+                                                        "description": "The bank transaction fee in string format",
+                                                        "type": "string",
+                                                        "example": "-ر.س.‏ 0.00"
+                                                    },
+                                                    "brokerage": {
+                                                        "description": "The brokerage fee for the merchant",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "brokerageStr": {
+                                                        "description": "The brokerage fee in string format",
+                                                        "type": "string",
+                                                        "example": "-ر.س.‏ 0.00"
+                                                    },
+                                                    "merchantActivityFeeDtls": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "activityId": {
+                                                                    "description": "The activity ID for the merchant fee",
+                                                                    "type": "string",
+                                                                    "example": "0"
+                                                                },
+                                                                "merchantActivityFee": {
+                                                                    "description": "The merchant activity fee",
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "merchantActivityFeeStr": {
+                                                                    "description": "The merchant activity fee in string format",
+                                                                    "type": "string",
+                                                                    "example": "0"
+                                                                },
+                                                                "platformActivityFee": {
+                                                                    "description": "The platform activity fee",
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "platformActivityFeeStr": {
+                                                                    "description": "The platform activity fee in string format",
+                                                                    "type": "string",
+                                                                    "example": "ر.س.‏ 0.00"
+                                                                },
+                                                                "reduceFee": {
+                                                                    "description": "The fee reduction",
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "sillAmount": {
+                                                                    "description": "The sill amount (default 0)",
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "type": {
+                                                                    "description": "The fee type",
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                },
+                                                                "typeName": {
+                                                                    "description": "The name of the fee type",
+                                                                    "type": "string",
+                                                                    "example": "0"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "platformServiceFee": {
+                                                        "description": "The platform service fee for the merchant",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "platformServiceFeeStr": {
+                                                        "description": "The platform service fee in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    },
+                                                    "total": {
+                                                        "description": "The total merchant fee",
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "totalStr": {
+                                                        "description": "The total merchant fee in string format",
+                                                        "type": "string",
+                                                        "example": "ر.س.‏ 0.00"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "foodPrepareInfo": {
+                                        "description": "Additional food preparation details (optional)",
+                                        "type": "object",
+                                        "nullable": true
+                                    },
+                                    "groupChoiceCompensationTag": {
+                                        "description": "Whether there is compensation for group choices",
+                                        "type": "boolean"
+                                    },
+                                    "merchantOrder": {
+                                        "properties": {
+                                            "accId": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "confirmStatus": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "createdDate": {
+                                                "description": "Creation date of the merchant order",
+                                                "type": "string",
+                                                "example": "0"
+                                            },
+                                            "createdDateStr": {
+                                                "description": "Creation date string of the merchant order",
+                                                "type": "string",
+                                                "example": "2024-11-13"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "merchantOrderlines": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "articleId": {
+                                                    "description": "The article ID",
+                                                    "type": "string",
+                                                    "example": "0"
+                                                },
+                                                "orderLineId": {
+                                                    "description": "The order line ID",
+                                                    "type": "string",
+                                                    "example": "0"
+                                                },
+                                                "quantity": {
+                                                    "description": "Quantity of the product",
+                                                    "type": "integer",
+                                                    "example": 0
+                                                },
+                                                "sku": {
+                                                    "description": "SKU of the product",
+                                                    "type": "string",
+                                                    "example": "0"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "orderId": {
+                                        "description": "The unique ID of the order",
+                                        "type": "string",
+                                        "example": "0"
+                                    },
+                                    "orderSource": {
+                                        "description": "The source of the order",
+                                        "type": "string",
+                                        "example": "0"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully received the webhook",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Response message",
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "Invalid data"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Order",
+            "description": "Order"
+        }
+    ]
+}
