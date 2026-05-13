@@ -25,6 +25,10 @@ storage/logs/*
 
 db.sql
 
-storage/api-docs/*.json
-*
-!.gitignore
+storage/api-docs/*.json*.zip
+*.rar
+*.7z
+*.log
+*.tmp
+*.bak
+*.lnk
